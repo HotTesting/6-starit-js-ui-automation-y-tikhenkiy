@@ -13,16 +13,16 @@ describe('Some test for Contact us form ', function () {
 
     it('should fill contacus form & click send button', function(){
                 
-        const acc_name = $("input[name=name]");
-        const contact_form = $("form[name='contact_form']");
-        const acc_email = contact_form.$("input[name=email]");
-        const subject = $("input[name=subject]");
-        const message = contact_form.$("tesxtarea");
+        const senderName = $("input[name=name]");
+        const contactUsForm = $("form[name='contact_form']");
+        const senderEmail = contactUsForm.$("input[name=email]");
+        const messageSubject = $("input[name=subject]");
+        const messageContent = contactUsForm.$("textarea");
 
-        acc_name.setValue('Test Testovych');
-        acc_email.setValue('test2@test.test');
-        subject.setValue('test subject');
-        message.setValue('test test test');
+        senderName.setValue('Test Testovych');
+        senderEmail.setValue('test2@test.test');
+        messageSubject.setValue('test subject');
+        messageContent.setValue('test test test');
 
         browser.click("button[name=send]");
         browser.pause(1000);
