@@ -1,7 +1,4 @@
-//import assert = require("assert");
 import {expect} from "chai";
-
-
 
 describe('WDIO', function () {
     xit('Should be alive', function () {
@@ -42,4 +39,5 @@ describe('WDIO', function () {
     }
       
     )
+
 })
