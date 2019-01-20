@@ -30,10 +30,8 @@ describe('WDIO', function () {
 
         browser.pause(1000);
 
-        let alert;
-        alert=browser.isExisting("//div[@id='notices']/div[@class='alert alert-danger']");
-        //console.log(alert);
-        expect(alert).to.be.true;
+        let isAlertExsit = browser.isExisting("//div[@id='notices']/div[@class='alert alert-danger']");
+        expect(isAlertExsit).to.be.true;
 
 
     }
