@@ -1,14 +1,14 @@
 import {expect} from "chai";
 
 describe('WDIO', function () {
-    it('Should be alive', function () {
+    xit('Should be alive', function () {
         browser.url('/')
         console.log('--Test passed!')
     }
       
-    )
+    ) 
 
-    it('should allert incorrect pass', function () {
+    xit('should allert incorrect pass', function () {
         
         browser.url('/create_account')
                
