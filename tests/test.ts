@@ -1,7 +1,7 @@
 import {expect} from "chai";
 
 describe('WDIO', function () {
-    xit('Should be alive', function () {
+    it('Should be alive', function () {
         browser.url('/')
         console.log('--Test passed!')
     }
