@@ -14,7 +14,7 @@ describe('WDIO', function () {
                
         const acc_firstname = $('input[name=firstname]');
         const acc_lastname = $('input[name=lastname]');
-        const acc_email = $("//div[@class='form-group col-md-6 required']//input[@name='email']");
+        const acc_email = $("(//input[@name='email'])[2]"); //the same as $("//div[@class='form-group col-md-6 required']//input[@name='email']");
         const acc_pass = $("//div[@class='form-group col-md-6 required']//input[@name='password']");
         const acc_confirmpass = $('input[name=confirmed_password]');
         const acc_countrycode = $('select[name=country_code]')
