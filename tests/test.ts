@@ -38,11 +38,8 @@ describe('WDIO', function () {
 
     it('should register new account', function(){
         
-        function randEmailLocalpart(n){  // [ 3 ] random words and digits by the wocabulary
-            var s ='', abd ='abcdefghijklmnopqrstuvwxyz0123456789', aL = abd.length;
-            while(s.length < n)
-              s += abd[Math.random() * aL|0];
-            return s;
+        function randEmailLocalpart(n){  
+            return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(n, 15)) );
           }
         
         const clientFirstName = $('input[name=firstname]');
@@ -58,6 +55,8 @@ describe('WDIO', function () {
         clientEmail.setValue(randEmailLocalpart(7)+"@test.test");
         clientPass.setValue("123123");
         clientPassConfirm.setValue("123123")
+
+        browser.pause(4000);
 
         browser.click("button[name=create_account]");
 
