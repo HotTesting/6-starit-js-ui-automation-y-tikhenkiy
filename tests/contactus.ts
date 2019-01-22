@@ -1,7 +1,7 @@
 import {expect} from "chai";
 
-describe('Some test for Contact us form ', function () {
-    xit('contactus form is existing', function(){
+describe.skip('Some test for Contact us form ', function () {
+    it('contactus form is existing', function(){
         browser.url('/customer-service-s-0');
 
         const contact_us_box = $('#box-contact-us');
@@ -11,7 +11,7 @@ describe('Some test for Contact us form ', function () {
 
     })
 
-    xit('should fill contacus form & click send button', function(){
+    it('should fill contacus form & click send button', function(){
                 
         const senderName = $("input[name=name]");
         const contactUsForm = $("form[name='contact_form']");

@@ -1,6 +1,6 @@
 import {expect} from "chai";
 
-describe('Some test for Account dropdown menu', function () {
+describe.skip('Some test for Account dropdown menu', function () {
     it('should check is Account dropdown menu visible', function(){
         browser.url("/");
         browser.pause(1000);
