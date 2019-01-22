@@ -56,15 +56,12 @@ describe('WDIO', function () {
         clientPass.setValue("123123");
         clientPassConfirm.setValue("123123")
 
-        browser.pause(4000);
-
         browser.click("button[name=create_account]");
 
         browser.pause(1000);
 
-        const isAlertSuccessVisible = browser.isVisible("#notices div[class='alert alert-success']");
+        const isAlertSuccessVisible = browser.isVisible("#notices div[class='alert alert-success']");//the as this short (".alert-success");
         expect(isAlertSuccessVisible).to.be.true;
-
     })
       
     
