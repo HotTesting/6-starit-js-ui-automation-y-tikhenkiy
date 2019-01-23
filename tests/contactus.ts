@@ -1,14 +1,9 @@
 import {expect} from "chai";
 
-describe('Some test for Contact us form ', function () {
-
-    before(function() {
-        browser.url('/');
-        browser.click('.customer-service');
-      });
-    
+describe.skip('Some test for Contact us form ', function () {
     it('contactus form is existing', function(){
-        
+        browser.url('/customer-service-s-0');
+
         const contact_us_box = $('#box-contact-us');
         browser.pause(1000);
         expect(contact_us_box.isVisible()).to.be.true;
