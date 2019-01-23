@@ -9,7 +9,8 @@ exports.config = {
     path: '/',
     services: ['chromedriver'],
     capabilities: [{
-        browserName: 'chrome'
+        maxInstances: 1,
+        browserName: 'chrome'        
     }],
     sync: true,
     logLevel: 'silent',

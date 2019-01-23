@@ -1,6 +1,7 @@
 import {expect} from "chai";
+var faker = require('faker');
 
-describe('WDIO', function () {
+describe.skip('WDIO', function () {
     it('Should be alive', function () {
         browser.url('/')
     }
@@ -19,24 +20,32 @@ describe('WDIO', function () {
         const clientPass = $("//div[@class='form-group col-md-6 required']//input[@name='password']");
         const clientConfirmPass = $('input[name=confirmed_password]');
         const clientCountryCode = $('select[name=country_code]');
-            
-        clientFirstName.addValue('test');
-        clientLastName.addValue('testovych');
+        
+   
+        clientFirstName.addValue(faker.name.firstName());
+        clientLastName.addValue(faker.name.lastName());
         clientCountryCode.selectByValue('GB');
-        clientEmail.setValue('test12@test.test');
-        clientPass.setValue('123123');
-        clientConfirmPass.setValue('023123');
-    
+        clientEmail.setValue(faker.internet.email(clientFirstName.getValue(),clientLastName.getValue()));
+        clientPass.setValue(faker.internet.password(8));
+        clientConfirmPass.setValue(faker.internet.password(8));
+        
+        console.log('first name: ', clientFirstName.getValue());
+        console.log('last name: ', clientLastName.getValue());
+        console.log('email: ', clientEmail.getValue());
+        console.log('Pass: ', clientPass.getValue());
+        console.log('Confirm Pass: ', clientConfirmPass.getValue());
+
+        browser.pause(2000);
         browser.click("button[name=create_account]");
 
-        browser.pause(1000);
+        
 
         let isAlertExsit = browser.isExisting("//div[@id='notices']/div[@class='alert alert-danger']");
         expect(isAlertExsit).to.be.true;
 
     })
 
-    it('should register new account', function(){
+    xit('should register new account', function(){
         
         function randEmailLocalpart(n){  
             return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(n, 15)) );
