@@ -28,11 +28,11 @@ describe('"Create account" form', function () {
         clientPass.setValue(faker.internet.password(8));
         clientConfirmPass.setValue(faker.internet.password(8));
         
-        console.log('first name: ', clientFirstName.getValue());
-        console.log('last name: ', clientLastName.getValue());
-        console.log('email: ', clientEmail.getValue());
-        console.log('Pass: ', clientPass.getValue());
-        console.log('Confirm Pass: ', clientConfirmPass.getValue());
+        //console.log('first name: ', clientFirstName.getValue());
+        //console.log('last name: ', clientLastName.getValue());
+        //console.log('email: ', clientEmail.getValue());
+        //console.log('Pass: ', clientPass.getValue());
+        //console.log('Confirm Pass: ', clientConfirmPass.getValue());
 
         browser.click("button[name=create_account]");
 
@@ -43,33 +43,31 @@ describe('"Create account" form', function () {
     })
 
     it('should register new client account', function(){
-        
+        /*
         function randEmailLocalpart(n){  
             return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(n, 15)) );
           }
-        
+        */
         const clientFirstName = $('input[name=firstname]');
         const clientLastName = $('input[name=lastname]');
         const clientEmail = $("(//input[@name='email'])[2]"); 
         const clientPass = $("(//input[@name='password'])[2]");
         const clientPassConfirm = $('input[name=confirmed_password]');
         const clientCountryCode = $('select[name=country_code]');
+        const genClientPass = faker.internet.password(8);
 
-        clientFirstName.addValue("test");
-        clientLastName.addValue("testovych");
+        clientFirstName.setValue(faker.name.firstName());
+        clientLastName.setValue(faker.name.lastName());
         clientCountryCode.selectByValue("GB");
-        clientEmail.setValue(randEmailLocalpart(7)+"@test.test");
-        clientPass.setValue("123123");
-        clientPassConfirm.setValue("123123")
+        clientEmail.setValue(faker.internet.email(clientFirstName.getValue(),clientLastName.getValue()));
+        clientPass.setValue(genClientPass);
+        clientPassConfirm.setValue(genClientPass);
 
         browser.click("button[name=create_account]");
 
-        browser.pause(1000);
+        browser.pause(1000);//wait untill page is loaded
 
         const isAlertSuccessVisible = browser.isVisible("#notices div[class='alert alert-success']");//the same as this short (".alert-success");
         expect(isAlertSuccessVisible).to.be.true;
     })
-      
-    
-
 })
