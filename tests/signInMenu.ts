@@ -1,34 +1,37 @@
 import {expect} from "chai";
 
-describe('Some test for Account dropdown menu', function () {
+describe('"Sign In" menu', function () {
     before(function() {
         browser.url('/');
-        browser.click('ul li[class="account dropdown"]');
-        browser.pause(1000);
+        browser.pause(1000); //wait untill page is loaded
       });
     
-    it('should check is Account dropdown menu visible', function(){
+    it('should be visible to user, after click on "Sign In" button in main navigation menu', function(){
         
+        const signInButton =$('ul li[class="account dropdown"]');
         const dropDown = $('form[name=login_form]');
+
+        signInButton.click();
+        browser.pause(1000); // wait until "SignIn" block is shown to user
         expect(dropDown.isVisible()).to.be.true;
               
     })
     
-    it('should Log in client from Account dropdown menu', function(){
+    it('should be able to log in user after valid credential are provided', function(){
         
                    
-        const acc_email = $("div input[name='email']");
-        const acc_pass = $("div input[name='password']");
+        const clientEmail = $("div input[name='email']");
+        const clientPass = $("div input[name='password']");
         
-        acc_email.setValue("test2@test.test");
-        acc_pass.setValue("123123"); 
+        clientEmail.setValue("test2@test.test");
+        clientPass.setValue("123123"); 
         
         browser.click("button[name='login']");
         browser.pause(1000);
         const contentBar = $("#content");
         const noticesBar = contentBar.$("#notices div");
         const alertContent =noticesBar.getText();
-        expect(alertContent).is.contain("You are now logged in as");
+        expect(alertContent).to.contain("You are now logged in as");
     })
 
 })
