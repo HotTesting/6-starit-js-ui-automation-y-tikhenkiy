@@ -1,18 +1,17 @@
 import {expect} from "chai";
 var faker = require('faker');
 
-describe.skip('WDIO', function () {
-    it('Should be alive', function () {
-        browser.url('/')
-    }
-      
-    ) 
+describe('"Create account" form', function () {
+    before(function() {
+        browser.url('/');
+        browser.pause(1000); //wait untill page is loaded
+      }); 
 
-    it('should be allert about incorrect pass', function () {
+    it('should be visible allert about incorrect pass', function () {
         
         browser.click('ul li[class="account dropdown"]');
         browser.click('(//li[@class="text-center"])[1]');
-        browser.pause(1000);
+        browser.pause(1000); //wait untill page is loaded
                
         const clientFirstName = $('input[name=firstname]');
         const clientLastName = $('input[name=lastname]');
@@ -35,17 +34,15 @@ describe.skip('WDIO', function () {
         console.log('Pass: ', clientPass.getValue());
         console.log('Confirm Pass: ', clientConfirmPass.getValue());
 
-        browser.pause(2000);
         browser.click("button[name=create_account]");
 
-        
-
+        browser.pause(1000);//wait untill page is loaded
         let isAlertExsit = browser.isExisting("//div[@id='notices']/div[@class='alert alert-danger']");
         expect(isAlertExsit).to.be.true;
 
     })
 
-    xit('should register new account', function(){
+    it('should register new client account', function(){
         
         function randEmailLocalpart(n){  
             return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(n, 15)) );
@@ -69,7 +66,7 @@ describe.skip('WDIO', function () {
 
         browser.pause(1000);
 
-        const isAlertSuccessVisible = browser.isVisible("#notices div[class='alert alert-success']");//the as this short (".alert-success");
+        const isAlertSuccessVisible = browser.isVisible("#notices div[class='alert alert-success']");//the same as this short (".alert-success");
         expect(isAlertSuccessVisible).to.be.true;
     })
       

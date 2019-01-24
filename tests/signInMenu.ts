@@ -29,7 +29,7 @@ describe('"Sign In" menu', function () {
         browser.click("button[name='login']");
         browser.pause(1000);
         const contentBar = $("#content");
-        const noticesBar = contentBar.$("#notices div");
+        const noticesBar = contentBar.$(".alert-success");
         const alertContent =noticesBar.getText();
         expect(alertContent).to.contain("You are now logged in as");
     })
