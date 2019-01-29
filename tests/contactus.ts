@@ -1,16 +1,18 @@
 import {expect} from "chai";
 
-describe('Some test for Contact us form ', function () {
+describe('"Contact us" form', function () {
 
     before(function() {
         browser.url('/');
-        browser.click('.customer-service');
+        browser.pause(1000);
+        
       });
     
-    it('contactus form is existing', function(){
+    it('should be existing', function(){
         
-        const contact_us_box = $('#box-contact-us');
+        browser.click('.customer-service');
         browser.pause(1000);
+        const contact_us_box = $('#box-contact-us');
         expect(contact_us_box.isVisible()).to.be.true;
         
 
