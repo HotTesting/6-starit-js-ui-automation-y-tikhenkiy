@@ -1,7 +1,7 @@
 import {expect} from "chai";
 var faker = require('faker');
 
-describe('Product', function(){
+/*describe('Product', function(){
     before(function() {
         browser.url('/');
         browser.pause(1000); //wait untill page is loaded
@@ -12,9 +12,13 @@ describe('Product', function(){
             const categoriesTree = $("#box-category-tree");
             expect(categoriesTree.isVisible()).to.be.true;
         })
+
+        it('', function(){
+
+        })
     
 
     })
       
 
-})
+})*/
