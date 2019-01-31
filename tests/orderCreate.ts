@@ -1,24 +1,18 @@
 import {expect} from "chai";
+import { productDetails } from "../pageObjects/productDetails";
+import { checkout } from "../pageObjects/checkout";
+import { OrderDetailsBuilder } from "../src/customerBuilder";
 var faker = require('faker');
 
-/*describe('Product', function(){
-    before(function() {
-        browser.url('/');
-        browser.pause(1000); //wait untill page is loaded
-      }); 
+describe('Product', function(){
+        it.only('should be ordered with page object', function(){
+            browser.url("/rubber-ducks-c-1/subcategory-c-2/green-duck-p-2");
+            productDetails.addToCart();
 
-    describe('should be ordered from "categories" at sidebar', function(){
-        it('"categories" is existing at sidebar on mainpage', function(){
-            const categoriesTree = $("#box-category-tree");
-            expect(categoriesTree.isVisible()).to.be.true;
-        })
-
-        it('', function(){
+            checkout.open();
+            checkout.typeFirstName(faker.name.firstName());
+            
+            
 
         })
-    
-
     })
-      
-
-})*/
