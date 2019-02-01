@@ -11,7 +11,7 @@ class Checkout{
         this.typeCity(customerDetails.city);
         this.typePostalCode(customerDetails.postalCode);
 
-    }
+   }
 
     saveChanges(): any{
         const saveCustomerBtn = 'button[name="save_customer_details"]';
@@ -65,7 +65,6 @@ export interface ICustomerDetails {
     city: string
     postalCode: string
     
-
     address2?: string
     country?: string
 }

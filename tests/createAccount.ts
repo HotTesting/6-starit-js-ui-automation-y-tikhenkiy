@@ -1,4 +1,5 @@
 import {expect} from "chai";
+import { join } from "path";
 var faker = require('faker');
 
 describe('"Create account" form', function () {
@@ -7,20 +8,22 @@ describe('"Create account" form', function () {
         browser.pause(1000); //wait untill page is loaded
       }); 
 
-    it('should be visible allert about incorrect pass', function () {
-        
-        browser.click('ul li[class="account dropdown"]');
-        browser.click('(//li[@class="text-center"])[1]');
-        browser.pause(1000); //wait untill page is loaded
-               
+      //defining selectors
         const clientFirstName = $('input[name=firstname]');
         const clientLastName = $('input[name=lastname]');
         const clientEmail = $("(//input[@name='email'])[2]"); //the same as $("//div[@class='form-group col-md-6 required']//input[@name='email']");
         const clientPass = $("//div[@class='form-group col-md-6 required']//input[@name='password']");
         const clientConfirmPass = $('input[name=confirmed_password]');
         const clientCountryCode = $('select[name=country_code]');
+        const genClientPass = faker.internet.password(8);
+
+
+    it('should be visible allert about incorrect pass', function () {
         
-   
+        browser.click('ul li[class="account dropdown"]');
+        browser.click('(//li[@class="text-center"])[1]');
+        browser.pause(1000); //wait untill page is loaded
+               
         clientFirstName.addValue(faker.name.firstName());
         clientLastName.addValue(faker.name.lastName());
         clientCountryCode.selectByValue('GB');
@@ -38,7 +41,7 @@ describe('"Create account" form', function () {
 
         browser.pause(1000);//wait untill page is loaded
         let isAlertExsit = browser.isExisting("//div[@id='notices']/div[@class='alert alert-danger']");
-        expect(isAlertExsit).to.be.true;
+        expect(isAlertExsit, 'alert "The passwords did not match" should be visible for user').to.be.true;
 
     })
 
@@ -48,26 +51,19 @@ describe('"Create account" form', function () {
             return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(n, 15)) );
           }
         */
-        const clientFirstName = $('input[name=firstname]');
-        const clientLastName = $('input[name=lastname]');
-        const clientEmail = $("(//input[@name='email'])[2]"); 
-        const clientPass = $("(//input[@name='password'])[2]");
-        const clientPassConfirm = $('input[name=confirmed_password]');
-        const clientCountryCode = $('select[name=country_code]');
-        const genClientPass = faker.internet.password(8);
-
+        
         clientFirstName.setValue(faker.name.firstName());
         clientLastName.setValue(faker.name.lastName());
         clientCountryCode.selectByValue("GB");
         clientEmail.setValue(faker.internet.email(clientFirstName.getValue(),clientLastName.getValue()));
         clientPass.setValue(genClientPass);
-        clientPassConfirm.setValue(genClientPass);
+        clientConfirmPass.setValue(genClientPass);
 
         browser.click("button[name=create_account]");
 
         browser.pause(1000);//wait untill page is loaded
 
         const isAlertSuccessVisible = browser.isVisible("#notices div[class='alert alert-success']");//the same as this short (".alert-success");
-        expect(isAlertSuccessVisible).to.be.true;
+        expect(isAlertSuccessVisible, 'alert "Your customer account has been created" should be visible for user').to.be.true;
     })
 })
