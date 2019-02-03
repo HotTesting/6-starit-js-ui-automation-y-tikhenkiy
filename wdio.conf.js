@@ -12,7 +12,6 @@ exports.config = {
         maxInstances: 1,
         browserName: 'chrome'        
     }],
-    waitforTimeout: 20000,
     sync: true,
     logLevel: 'silent',
     coloredLogs: true,
@@ -20,6 +19,7 @@ exports.config = {
     baseUrl: 'http://ip-5236.sunline.net.ua:38015',
     framework: 'mocha',
     mochaOpts: {
-        ui: 'bdd'
+        ui: 'bdd',
+        timeout: '120000'
     }
 }
