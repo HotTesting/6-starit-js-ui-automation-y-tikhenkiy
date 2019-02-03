@@ -12,7 +12,7 @@ exports.config = {
         maxInstances: 1,
         browserName: 'chrome'        
     }],
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
     sync: true,
     logLevel: 'silent',
     coloredLogs: true,
