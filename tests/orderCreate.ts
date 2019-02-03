@@ -2,7 +2,7 @@ import {expect} from "chai";
 import { productDetails } from "../pageObjects/productDetails";
 import { checkout } from "../pageObjects/checkout";
 
-var faker = require('faker');
+import * as faker from "faker";
 
 describe('Product', function(){
         it.only('should be ordered with page object', function(){
@@ -12,6 +12,8 @@ describe('Product', function(){
             checkout.open(); //goto shopping cart page
             const clientFirstName = faker.name.firstName();
             const clientLastName = faker.name.lastName();
+            const minPostCode = 100000;
+            const maxPostCode = 999999;
                     
             checkout.proceedOrderWith({  //fill all of required fields
                 firstName: clientFirstName,
@@ -20,10 +22,10 @@ describe('Product', function(){
                 email: faker.internet.email(clientFirstName,clientLastName),
                 phone: faker.phone.phoneNumber(),
                 city: faker.address.city(),
-                postalCode: faker.address.zipCode()
-
+                postalCode: faker.address.zipCode('######')
             })
 
             checkout.saveChanges(); //click on the save change button
+            checkout.confirmOrder();    
         })
     })

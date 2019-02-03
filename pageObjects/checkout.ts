@@ -19,6 +19,18 @@ class Checkout{
         $(saveCustomerBtn).click();
     };
 
+    confirmOrder(): any{
+        
+        browser.waitUntil(
+            function(){
+                return (browser.getAttribute('button[name="confirm_order"]', "disabled")==null);
+            }, 5000, "Confirm order button should become enabled to click, make sure that all required fields are filled"
+        );
+        // const confirmOrderButton = 'button[name = "confirm_order"]';
+        // browser.waitForEnabled(confirmOrderButton, 8000);
+        $('button[name = "confirm_order"]').click();
+    };
+
     typeFirstName(firstName: string):any {
         const firstNameInput = 'input[name="firstname"]';
         browser.waitForVisible(firstNameInput, 5000);
@@ -46,12 +58,12 @@ class Checkout{
         $(phoneInput).setValue(phone);
     };
     typeCity(city: string): any{
-        const cityInput = 'input[name="phone"]';
+        const cityInput = 'input[name="city"]';
         browser.waitForVisible(cityInput, 5000);
         $(cityInput).setValue(city);
     };
     typePostalCode(postalCode: string): any{
-        const postalCodeInput = 'input[name="phone"]';
+        const postalCodeInput = 'input[name="postcode"]';
         browser.waitForVisible(postalCodeInput, 5000);
         $(postalCodeInput).setValue(postalCode);
     };
