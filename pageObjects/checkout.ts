@@ -31,6 +31,52 @@ class Checkout{
         $('button[name = "confirm_order"]').click();
     };
 
+    shippingAddress(shippingAddressDetails: IDifferentShippingAddress): any{
+        browser.waitUntil(
+            function(){
+                return (browser.getAttribute('h3 input[name = "different_shipping_address"]', 'checked')!=null);
+            }, 5000, "Different Shipping Address checkbox should be checked, make sure that required condition is fulfilled!"
+        );
+        this.typeShippingFisrtName(shippingAddressDetails.firstName);
+        this.typeShippingLastName(shippingAddressDetails.lastName);
+        this.typeShippingAdress1(shippingAddressDetails.address1);
+        this.typeShippingCity(shippingAddressDetails.city);
+        this.typeShippingPostalCode(shippingAddressDetails.postalCode);
+        
+    }
+
+    typeShippingPostalCode(shippingPostalCode: string): any {
+        const shippingPostalCodeInput = 'input[name="shipping_address[postcode]"]';
+        browser.waitForVisible(shippingPostalCodeInput, 5000);
+        $(shippingPostalCodeInput).setValue(shippingPostalCode);
+        
+    }
+
+    typeShippingCity(shippingCity: string): any {
+        const shippingCityInput = 'input[name="shipping_address[city]"]';
+        browser.waitForVisible(shippingCityInput, 5000);
+        $(shippingCityInput).setValue(shippingCity);
+    }
+
+    typeShippingAdress1(shippingAddress1: string): any {
+        const shippingAddress1Input = 'input[name="shipping_address[address1]"]';
+        browser.waitForVisible(shippingAddress1Input, 5000);
+        $(shippingAddress1Input).setValue(shippingAddress1);
+    }
+
+    typeShippingFisrtName(shippingfirstName: string): any {
+        const shippingFirstNameInput = 'input[name="shipping_address[firstname]"]';
+        browser.waitForVisible(shippingFirstNameInput, 5000);
+        $(shippingFirstNameInput).setValue(shippingfirstName);
+    }
+
+    typeShippingLastName(shippingLastName: string): any {
+        const shippingLastNameInput = 'input[name="shipping_address[lastname]"]';
+        browser.waitForVisible(shippingLastNameInput, 5000);
+        $(shippingLastNameInput).setValue(shippingLastName);
+
+    }
+
     typeFirstName(firstName: string):any {
         const firstNameInput = 'input[name="firstname"]';
         browser.waitForVisible(firstNameInput, 5000);
@@ -79,6 +125,18 @@ export interface ICustomerDetails {
     
     address2?: string
     country?: string
+}
+export interface IDifferentShippingAddress {
+    firstName: string
+    lastName: string
+    address1: string
+    postalCode: string
+    city: string
+    
+    phone?: string
+    address2?: string
+    country?: string
+    company?: string
 }
 
 export const checkout = new Checkout()

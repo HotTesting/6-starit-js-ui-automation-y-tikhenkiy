@@ -37,20 +37,16 @@ describe('"Create account" form', function () {
 
     })
 
-   xit('should register new client account', function(){
-        /*
-        function randEmailLocalpart(n){  
-            return Math.random().toString(36).slice(2, 2 + Math.max(1, Math.min(n, 15)) );
-          }
-        */
+   it('should register new client account', function(){
         
-        // $(clientFirstName).setValue(faker.name.firstName());
-        // $(clientLastName).setValue(faker.name.lastName());
-        // $(clientCountryCode).selectByValue("GB");
-        // $(clientEmail).setValue(faker.internet.email($(clientFirstName).getValue(),$(clientLastName).getValue()));
-        // $(clientPass).setValue(genClientPass);
-        // $(clientConfirmPass).setValue(genClientPass);
-
+    authForm.registration({
+        firstName: clientFirstName,
+        lastName: clientLastName,
+        email: faker.internet.email(clientFirstName, clientLastName),
+        desiredPass: genClientPass,
+        confirmPass: genClientPass         
+    })
+    
         browser.click("button[name=create_account]");
 
         browser.pause(1000);//wait untill page is loaded

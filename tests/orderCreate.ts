@@ -3,13 +3,16 @@ import { productDetails } from "../pageObjects/productDetails";
 import { checkout } from "../pageObjects/checkout";
 
 import * as faker from "faker";
+import { confirmation } from "../pageObjects/confirmation";
 
 describe('Product', function(){
-        it.only('should be ordered with page object', function(){
-            browser.url("/rubber-ducks-c-1/subcategory-c-2/green-duck-p-2"); //goto green duck details page
-            productDetails.addToCart(); //add green duck to shopping cart
-            
-            checkout.open(); //goto shopping cart page
+     beforeEach(function(){
+        browser.url("/rubber-ducks-c-1/subcategory-c-2/green-duck-p-2"); //goto green duck details page
+        productDetails.addToCart(); //add green duck to shopping cart
+        checkout.open(); //goto shopping cart page
+    });   
+    xit('should be ordered with PO', function(){
+                    
             const clientFirstName = faker.name.firstName();
             const clientLastName = faker.name.lastName();
             const minPostCode = 100000;
@@ -20,12 +23,52 @@ describe('Product', function(){
                 lastName: clientLastName,
                 address1: faker.address.streetAddress(),
                 email: faker.internet.email(clientFirstName,clientLastName),
-                phone: faker.phone.phoneNumber(),
+                phone: faker.phone.phoneNumber('#########'),
                 city: faker.address.city(),
                 postalCode: faker.address.zipCode('######')
             })
 
             checkout.saveChanges(); //click on the save change button
-            checkout.confirmOrder();    
-        })
+            checkout.confirmOrder(); //click on the Confirm Oder button
+            
+            
+            expect(confirmation.isLoaded()).to.equal(true, "Expected that confirmation page appears");
+            expect(confirmation.confirmationTitle()).to.match(/Your order #.* is successfully completed!/);
+        });
+
+        it.only("should be ordered with different shipping Address by PO", function(){
+            
+            
+            const clientFirstName = faker.name.firstName();
+            const clientLastName = faker.name.lastName();
+            const minPostCode = 100000;
+            const maxPostCode = 999999;
+            
+            checkout.proceedOrderWith({
+                firstName: clientFirstName,
+                lastName: clientLastName,
+                address1: faker.address.streetAddress(),
+                email: faker.internet.email(clientFirstName, clientLastName),
+                phone: faker.phone.phoneNumber('#########'),
+                city: faker.address.city(),
+                postalCode: faker.address.zipCode('######')
+            });
+
+            browser.click('h3 input[name="different_shipping_address"]')
+            
+            checkout.shippingAddress({
+                firstName: faker.name.firstName(),
+                lastName: faker.name.lastName(),
+                address1: faker.address.streetAddress(),
+                postalCode: faker.address.zipCode('######'),
+                city: faker.address.city()
+            });
+
+            checkout.saveChanges(); //click on the save change button
+            checkout.confirmOrder(); //click on the Confirm Oder button
+
+            expect(confirmation.isLoaded()).to.equal(true, "Expected that confirmation page appears");
+            expect(confirmation.confirmationTitle()).to.match(/Your order #.* is successfully completed!/);
+        });
+
     })
