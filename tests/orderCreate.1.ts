@@ -18,10 +18,7 @@ describe('Product', function(){
 
     it('should be ordered with PO', function(){
                     
-            //const clientFirstName = faker.name.firstName();
-            //const clientLastName = faker.name.lastName();
-                                
-            checkout.proceedOrderWith({  //fill all of required fields
+                checkout.proceedOrderWith({  //fill all of required fields
                 firstName: clientFirstName,
                 lastName: clientLastName,
                 address1: faker.address.streetAddress(),
@@ -38,11 +35,8 @@ describe('Product', function(){
             expect(confirmation.confirmationTitle()).to.match(/Your order #.* is successfully completed!/);
         });
 
-        xit("should be ordered with different shipping Address by PO", function(){
-
-            browser.sessionStorage('DELETE');
-           
-                       
+        it("should be ordered with different shipping Address by PO", function(){
+                   
             checkout.proceedOrderWith({
                 firstName: clientFirstName,
                 lastName: clientLastName,
