@@ -7,17 +7,20 @@ import { confirmation } from "../pageObjects/confirmation";
 
 describe('Product', function(){
      beforeEach(function(){
+        
         browser.url("/rubber-ducks-c-1/subcategory-c-2/green-duck-p-2"); //goto green duck details page
         productDetails.addToCart(); //add green duck to shopping cart
         checkout.open(); //goto shopping cart page
     });   
-    xit('should be ordered with PO', function(){
+
+    const clientFirstName = faker.name.firstName();
+    const clientLastName = faker.name.lastName();
+
+    it('should be ordered with PO', function(){
                     
-            const clientFirstName = faker.name.firstName();
-            const clientLastName = faker.name.lastName();
-            const minPostCode = 100000;
-            const maxPostCode = 999999;
-                    
+            //const clientFirstName = faker.name.firstName();
+            //const clientLastName = faker.name.lastName();
+                                
             checkout.proceedOrderWith({  //fill all of required fields
                 firstName: clientFirstName,
                 lastName: clientLastName,
@@ -31,19 +34,15 @@ describe('Product', function(){
             checkout.saveChanges(); //click on the save change button
             checkout.confirmOrder(); //click on the Confirm Oder button
             
-            
             expect(confirmation.isLoaded()).to.equal(true, "Expected that confirmation page appears");
             expect(confirmation.confirmationTitle()).to.match(/Your order #.* is successfully completed!/);
         });
 
-        it.only("should be ordered with different shipping Address by PO", function(){
-            
-            
-            const clientFirstName = faker.name.firstName();
-            const clientLastName = faker.name.lastName();
-            const minPostCode = 100000;
-            const maxPostCode = 999999;
-            
+        xit("should be ordered with different shipping Address by PO", function(){
+
+            browser.sessionStorage('DELETE');
+           
+                       
             checkout.proceedOrderWith({
                 firstName: clientFirstName,
                 lastName: clientLastName,
@@ -54,6 +53,7 @@ describe('Product', function(){
                 postalCode: faker.address.zipCode('######')
             });
 
+            browser.pause(1000);
             browser.click('h3 input[name="different_shipping_address"]')
             
             checkout.shippingAddress({
@@ -64,7 +64,10 @@ describe('Product', function(){
                 city: faker.address.city()
             });
 
+            browser.pause(2000);
             checkout.saveChanges(); //click on the save change button
+            
+            browser.pause(2000);
             checkout.confirmOrder(); //click on the Confirm Oder button
 
             expect(confirmation.isLoaded()).to.equal(true, "Expected that confirmation page appears");
