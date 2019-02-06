@@ -3,7 +3,7 @@ require('ts-node').register()
 
 exports.config = {
     specs: [
-        './tests/**/*.1.ts'
+        './tests/**/*.ts'
     ],
     port: '9515',
     path: '/',
