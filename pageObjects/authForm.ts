@@ -12,8 +12,11 @@ class AuthForm{
         this.typeConfirmPass(accountDetails.confirmPass);
     }
 
-    recoveryPass(){
+    recoveryPass(emailAddress: string):any {
         //recoveryPass logic code
+        const emailAddressInput = "(//input[@type = 'email'])[2]";
+        browser.waitForVisible(emailAddressInput, 5000);
+        $(emailAddressInput).setValue(emailAddress);
     }
     typeFirstName(firstName: string):any {
         const firstNameInput = 'input[name=firstname]';

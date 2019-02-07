@@ -7,7 +7,7 @@ import { confirmation } from "../pageObjects/confirmation";
 
 describe('Product', function(){
      beforeEach(function(){
-        
+        browser.windowHandleMaximize();
         browser.url("/rubber-ducks-c-1/subcategory-c-2/green-duck-p-2"); //goto green duck details page
         productDetails.addToCart(); //add green duck to shopping cart
         checkout.open(); //goto shopping cart page
