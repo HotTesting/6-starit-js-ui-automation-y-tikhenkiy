@@ -9,10 +9,17 @@ describe('"Sign In" form', function () {
         browser.pause(1000); //wait untill page is loaded 
         browser.click('li[class="account dropdown"]');
     });
+  
+    afterEach(function(){
+        browser.deleteCookie();
+    }
+
+);
             
     //defining variables with client personal data
         const clientFirstName = faker.name.firstName();
         const clientLastName = faker.name.lastName();
+        const clientEmail = faker.internet.email(clientFirstName, clientLastName);
         const genClientPass = faker.internet.password(8);
 
     it('should be visible allert about incorrect pass', function () {
@@ -37,14 +44,16 @@ describe('"Sign In" form', function () {
     it('should register new client account', function(){
         browser.click('(//li[@class="text-center"])[1]');
         browser.pause(1000); //wait untill page is loaded
+
         authForm.registration({
             firstName: clientFirstName,
             lastName: clientLastName,
-            email: faker.internet.email(clientFirstName, clientLastName),
+            email: clientEmail,
             desiredPass: genClientPass,
             confirmPass: genClientPass         
         })
-        
+        console.log(clientEmail);
+        console.log(genClientPass);
         browser.click("button[name=create_account]");
 
         browser.pause(500);//wait untill page is loaded
@@ -72,4 +81,27 @@ describe('"Sign In" form', function () {
         const isAlertSuccessVisible= browser.isVisible('#notices');
         expect(isAlertSuccessVisible, 'alert "An email with instructions has been sent to your email address" should be visible for user').to.be.true;
     })
+
+    it('should Signed in client to site account', function(){
+        const logoutMenu = browser.getText('(//ul[@class="dropdown-menu"])[3]/li[3]');
+        console.log('----------------------');
+        console.log(clientEmail);
+        console.log(genClientPass);
+
+        //will logout client from account if already logged in
+        if(logoutMenu == 'Logout'){
+            browser.url('http://ip-5236.sunline.net.ua:38015/logout');
+            browser.click('li[class="account dropdown"]');
+        }
+        authForm.login(clientEmail, genClientPass); //type client login and pass into dropdown signIn form
+        // authForm.login('test2@test.test', '123123'); //type client login and pass into dropdown signIn form
+
+        browser.click('button[name = "login"]');
+
+        browser.pause(500);//wait untill page is loaded
+
+        const isAlertSuccessVisible= browser.isVisible(".alert-success");
+        expect(isAlertSuccessVisible, 'alert "You are now logged in as "'+clientFirstName+' '+clientLastName+' should be visible for user').to.be.true;
+    })
+
 })

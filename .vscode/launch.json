@@ -10,7 +10,7 @@
             "name": "Debug",
             "program": "${workspaceFolder}/node_modules/webdriverio/build/lib/cli.js",
             "sourceMaps": true,
-            "args": ["./wdio.conf.debug.js", "--spec", "./tests/createAccount.ts"],
+            "args": ["./wdio.conf.debug.js", "--spec", "./tests/createAccount.1.ts"],
             "env": {
                 "DEBUG": "1"
             },

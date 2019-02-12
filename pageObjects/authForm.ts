@@ -1,7 +1,15 @@
 class AuthForm{
 
-    login(){
+    login(clientSigninEmail: string, clientSigninPass: string){
         //login logic code
+        const clientSigninEmailInput = "input[type = 'email']";
+        const clientSigninPassInput = "input[type = 'password']";
+        browser.waitForVisible(clientSigninEmailInput, 5000);
+        browser.waitForVisible(clientSigninPassInput, 5000);
+        $(clientSigninEmailInput).setValue(clientSigninEmail);
+        $(clientSigninPassInput).setValue(clientSigninPass);
+
+
     }
 
     registration(accountDetails: ICreateAccountData){
