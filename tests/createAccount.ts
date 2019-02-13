@@ -48,10 +48,7 @@ describe('"Sign In" form', function () {
             desiredPass: genClientPass,
             confirmPass: genClientPass         
         })
-        console.log('registration');
-        console.log(clientEmail);
-        console.log(genClientPass);
-        browser.pause(2000);
+        browser.pause(500);
         browser.click("button[name=create_account]");
 
         browser.pause(500);//wait untill page is loaded
@@ -89,8 +86,6 @@ describe('"Sign In" form', function () {
             browser.click('li[class="account dropdown"]');
         }
         authForm.login(clientEmail, genClientPass); //type client login and pass into dropdown signIn form
-        // authForm.login('test2@test.test', '123123'); //type client login and pass into dropdown signIn form
-        browser.pause(2000);
         browser.click('button[name = "login"]');
 
         browser.pause(500);//wait untill page is loaded

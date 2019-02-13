@@ -6,7 +6,7 @@
   "scripts": {
     "test": "wdio ./wdio.conf.js",
     "ci-test": "wdio --host 'ip-5236.sunline.net.ua' --port '4444' --path '/wd/hub' ./wdio.conf.js",
-    "generateMochawesome": "marge D:/js-training/6-starit-js-ui-automation-y-tikhenkiy/myfile.json --reportTitle 'My Project Results'"
+    "generateMochawesome": "marge ./myfile.json --reportTitle 'My Project Results'"
   },
   "dependencies": {
     "@types/chai": "4.1.7",
