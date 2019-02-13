@@ -2,6 +2,7 @@ import {expect} from "chai";
 import { authForm } from "../pageObjects/authForm";
 import * as faker from "faker";
 
+
 describe('"Sign In" form', function () {
     
     beforeEach(function() {
@@ -10,12 +11,6 @@ describe('"Sign In" form', function () {
         browser.click('li[class="account dropdown"]');
     });
   
-    afterEach(function(){
-        browser.deleteCookie();
-    }
-
-);
-            
     //defining variables with client personal data
         const clientFirstName = faker.name.firstName();
         const clientLastName = faker.name.lastName();
@@ -39,6 +34,7 @@ describe('"Sign In" form', function () {
         browser.pause(500);//wait untill page is loaded
         let isAlertExsit = browser.isExisting("//div[@id='notices']/div[@class='alert alert-danger']");
         expect(isAlertExsit, 'alert "The passwords did not match" should be visible for user').to.be.true;
+        
     })
 
     it('should register new client account', function(){
@@ -52,8 +48,10 @@ describe('"Sign In" form', function () {
             desiredPass: genClientPass,
             confirmPass: genClientPass         
         })
+        console.log('registration');
         console.log(clientEmail);
         console.log(genClientPass);
+        browser.pause(2000);
         browser.click("button[name=create_account]");
 
         browser.pause(500);//wait untill page is loaded
@@ -84,10 +82,7 @@ describe('"Sign In" form', function () {
 
     it('should Signed in client to site account', function(){
         const logoutMenu = browser.getText('(//ul[@class="dropdown-menu"])[3]/li[3]');
-        console.log('----------------------');
-        console.log(clientEmail);
-        console.log(genClientPass);
-
+       
         //will logout client from account if already logged in
         if(logoutMenu == 'Logout'){
             browser.url('http://ip-5236.sunline.net.ua:38015/logout');
@@ -95,7 +90,7 @@ describe('"Sign In" form', function () {
         }
         authForm.login(clientEmail, genClientPass); //type client login and pass into dropdown signIn form
         // authForm.login('test2@test.test', '123123'); //type client login and pass into dropdown signIn form
-
+        browser.pause(2000);
         browser.click('button[name = "login"]');
 
         browser.pause(500);//wait untill page is loaded

@@ -39,8 +39,14 @@ class AuthForm{
     };
 
     typeEmail(email: string): any{
+        // const emailInput = '(//input[@name="email"])[2]';
+        // browser.waitForVisible(emailInput, 5000);
+        // $(emailInput).setValue(email);
         const emailInput = '(//input[@name="email"])[2]';
         browser.waitForVisible(emailInput, 5000);
+        $(emailInput).click()
+        //$(emailInput).clearElement()
+        browser.pause(1000)
         $(emailInput).setValue(email);
     }
     typeDesiredPass(desiredPass: string): any{

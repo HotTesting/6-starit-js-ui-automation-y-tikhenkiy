@@ -3,7 +3,7 @@ require('ts-node').register()
 
 exports.config = {
     specs: [
-        './tests/**/*.1.ts'
+        './tests/**/*.ts'
     ],
     port: '9515',
     path: '/',
@@ -22,4 +22,9 @@ exports.config = {
         ui: 'bdd',
         timeout: '120000'
     },
+    reporters: ['dot', 'mochawesome'],
+    reporterOptions: {
+      outputDir: './', //json file will be written to this directory
+      mochawesome_filename: 'myfile.json' //will default to wdiomochawesome.json if no name is provided
+    }
 }
